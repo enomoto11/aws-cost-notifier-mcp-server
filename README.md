@@ -50,9 +50,15 @@ npm install
 npm run build
 ```
 
-## 使用方法
+## 実行方法
 
-### MCPサーバーとして使用
+### 直接実行
+
+```bash
+node build/index.js
+```
+
+### Cursor MCPサーバーとして実行
 
 1. `.cursor/mcp.json`に以下の設定を追加:
 ```json
@@ -60,9 +66,8 @@ npm run build
   "mcpServers": {
     "aws-cost-notifier": {
       "command": "node",
-      "args": [
-        "/path/to/aws-cost-notifier-mcp-server/build/index.js"
-      ],
+      "args": ["build/index.js"],
+      "cwd": "/path/to/aws-cost-notifier-mcp-server",
       "env": {
         "AWS_PROFILE": "default",
         "AWS_REGION": "ap-northeast-1",
@@ -76,20 +81,29 @@ npm run build
 }
 ```
 
-2. AWS認証情報の設定:
-- AWS CLIの設定が完了していること
-- 適切なIAMポリシー（`ce:GetCostAndUsage`権限）が付与されていること
-
-3. GitHub認証情報の設定:
-- GitHubトークンに必要な権限:
-  - `repo` スコープ（プライベートリポジトリの場合）
-  - `public_repo` スコープ（パブリックリポジトリの場合）
-
-### 実行
-
+2. Cursorで実行:
 ```bash
 mcp aws-cost-notifier
 ```
+
+## 開発環境
+
+### VSCode
+
+このプロジェクトにはVSCode用の推奨設定が含まれています：
+
+1. 推奨拡張機能:
+- ESLint
+- Prettier
+- TypeScript and JavaScript Language Features
+
+2. デバッグ設定:
+- F5キーでTypeScriptコードを直接デバッグ実行できます
+- 環境変数は`.env`ファイルから自動的に読み込まれます
+
+3. 自動フォーマット:
+- ファイル保存時に自動フォーマット
+- ESLintの自動修正が有効
 
 ## 出力形式
 
